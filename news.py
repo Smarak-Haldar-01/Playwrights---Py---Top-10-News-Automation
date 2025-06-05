@@ -9,8 +9,8 @@ def page_pdf_generator(page):
 
     try:
         page.goto("https://timesofindia.indiatimes.com/india/timestopten.cms", timeout=1200)
-    except Exception as E:
-        print(E)
+    except Exception as TE:
+        print(TE)
     # page.goto("https://foundryco.com/our-solutions/events/")
 
     contents = page.locator(".news_title").all_inner_texts()
@@ -32,12 +32,13 @@ def page_pdf_generator(page):
 
         json.append(sub_content[1])
 
-    print(json)
+    # print(json)
 
     page.close()
 
     pd.DataFrame(json).to_csv('top10news.csv')
 
 with sync_playwright() as plywrt:
+    # print("Starting")
     page_pdf_generator(plywrt)
 
